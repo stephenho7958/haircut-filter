@@ -4,7 +4,7 @@ import cv2 as cv
 classifier = cv.CascadeClassifier(cv.data.haarcascades + "haarcascade_frontalface_default.xml")
 count = 0
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture('./data/facevid_far.mp4')
 #print error message if webcam is unavailable
 if not cap.isOpened():
     print("Cannot open camera")
