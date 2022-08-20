@@ -7,7 +7,7 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_face_mesh = mp.solutions.face_mesh
 mp_face_detection = mp.solutions.face_detection
 
-cap = cv.VideoCapture('./data/facevid_far.mp4')
+cap = cv.VideoCapture('./data/facevid_white_noglasses.mp4')
 #configure face mesh
 with mp_face_mesh.FaceMesh(max_num_faces=2,refine_landmarks=True,min_detection_confidence=0.5,min_tracking_confidence=0.5) as face_mesh:
     while cap.isOpened():
