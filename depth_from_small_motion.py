@@ -4,7 +4,7 @@ import cv2 as cv
 import PyCeres
 import matplotlib.pyplot as plt
 
-cap = cv.VideoCapture('facevid_smallmotion.mp4')
+cap = cv.VideoCapture('./data/facevid_smallmotion.mp4')
 
 # Parameters for lucas kanade optical flow
 lk_params = dict( winSize  = (15, 15),
@@ -74,7 +74,7 @@ print(len(features_i[3]))
 for f in features:
     cv.circle(old_frame,(int(f[0][0]),int(f[0][1])),3,(0,0,255),-1)
 
-cv.imwrite('face_features.png', old_frame)
+cv.imwrite('./data/face_features.png', old_frame)
 
 cx = image_width/2
 cy = image_height/2
@@ -96,7 +96,7 @@ for idx,f in enumerate(features):
     for j,image in enumerate(features_i):
         u = image[idx][0][0]
         v = image[idx][0][1]
-        cost_function = PyCeres.BACostFunction(f_init, cx, cy,u0,v0,u,v)
+        cost_function = PyCeres.CreateBACostFunction(f_init, cx, cy,u0,v0,u,v)
         loss = PyCeres.HuberLoss(0.1)
         problem.AddResidualBlock(cost_function, loss, poses[j], inv_depths[idx], variables)
         #obtain camera poses (6 variables for each of the 30 frame) and inverse depths (1 variable for each of the 30 frames)
@@ -136,5 +136,9 @@ for camera in poses:
     cam_poses.append([x_cam, y_cam, z_cam])
 
 ax.scatter([i[0] for i in cam_poses],[i[1] for i in cam_poses],[i[2] for i in cam_poses])
-plt.savefig('cam_poses_plt.png')
-np.savetxt("camera_poses.txt",np.array(cam_poses))
+plt.savefig('./datacam_poses_plt.png')
+np.savetxt("./data/camera_poses.txt",np.array(cam_poses))
+
+#Calibrate frames - no need, smartphone does it by itself -> should be OK. If not then fk me
+
+
