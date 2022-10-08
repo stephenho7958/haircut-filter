@@ -4,7 +4,7 @@ import cv2 as cv
 import PyCeres
 import matplotlib.pyplot as plt
 
-cap = cv.VideoCapture('./data/facevid_smallmotion.mp4')
+cap = cv.VideoCapture("./data/facevid_smallmotion.mp4")
 
 # Parameters for lucas kanade optical flow
 lk_params = dict( winSize  = (15, 15),
